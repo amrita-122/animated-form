@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* position: relative; */
+        background-color: aquamarine ;
+    }
+    .username-div,.email-div,.password-div,.phone-div{
+        /* position: absolute;
+        top: 50%;
+        left: 50%; */
+        /* transform: translate(-50%,-50%) ; */
+        border: 1px solid black;
+        margin: 35px 0px;
+        cursor: pointer;
+        border-radius: 8px;
+        padding: 6px;
+        background-color: white;
+
+    }
+    .username,.email,.password,.phone{
+        height: 30px;
+        width: 250px;
+        cursor: pointer;
+        margin: 0px 4px;
+        outline: none;
+        border: none;
+        padding-left: 9px;
+        
+    }
+
+    .inactive{
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(0,-180%) ;  
+        
+    }
+
+    .active{
+        transition: all 1s ease; 
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    @keyframes shake {
+        0% {
+            transform: rotate(0deg);
+        }
+        25%{
+            transform: rotate(10deg);
+        }
+        50%{
+            transform: rotate(-10deg);
+        }
+        75%{
+            transform: rotate(10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+</style>
+<body>
+    <form action="">
+        <div class="username-div active">
+            <i class="fa-solid fa-user"></i>
+            <input class="username" type="text" placeholder="Username">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="email-div inactive">
+            <i class="fa-solid fa-envelope"></i>
+            <input class="email" type="email" placeholder="email">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="password-div inactive">
+            <i class="fa-solid fa-lock"></i>
+            <input class="password" type="password" placeholder="password">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="phone-div inactive">
+            <i class="fa-solid fa-phone"></i>
+            <input class="phone" type="number" placeholder="phone number">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="inactive">
+            <button class="button">Submit</button>
+        </div>
+    </form>
+   <script>
+    function aform(){
+    const arrow = document.querySelectorAll(".fa-check");    
+    arrow.forEach(arrow => {
+
+    arrow.addEventListener('click',()=>{
+        const input = arrow.previousElementSibling;
+        const parent = arrow.parentElement;
+        const nextDiv = parent.nextElementSibling;
+
+        if (valiUser(input)) {
+            nextSlide(parent,nextDiv);
+        }
+        else{
+            parent.style.animation = 'shake 0.5s';
+            parent.style.animationIterationCount ='1';
+        }
+
+    });
+});
+    }
+
+function valiUser(user){
+    if (user.value.length > 6) {
+        document.body.style.backgroundColor ='lightgreen';
+        document.body.style.transition = 'background-color 1s ease';
+        return true;
+
+    }
+    else{
+        document.body.style.backgroundColor = 'rgb(213, 92, 92)';
+        document.body.style.transition = 'background-color 1s ease'; 
+        aform();
+    }
+  
+}
+
+
+function nextSlide(parent,nextDiv){
+    // parent.classList.remove ('active');
+    // parent.classList.add('inactive');
+    nextDiv.classList.add ('active');
+    nextDiv.classList.remove('inactive');
+
+}
+
+
+
+aform();
+
+   </script>
+    <script src="https://kit.fontawesome.com/a5b4a8a3c2.js" crossorigin="anonymous"></script>
+    
+</body>
+</html>
